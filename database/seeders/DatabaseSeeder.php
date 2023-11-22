@@ -1,111 +1,38 @@
-<?php
-
-namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // \App\Models\User::factory(10)->create();
+/**
+* Seed the application's database.
+*/
+public function run(): void
+{
+User::factory(3)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+Category::create([
+'name' => Str::random(10), // Ubah ini sesuai kebutuhan
+'slug' => Str::slug(Str::random(10)) // Menggunakan fungsi Str::slug() untuk membuat slug
+]);
 
-        User::create([
-            'name' => 'Aston',
-            'email' => 'aqqqs@asdas.cc',
-            'password' => bcrypt('123123')
-        ]);
+Category::create([
+'name' => Str::random(10),
+'slug' => Str::slug(Str::random(10))
+]);
 
-        Category::create([
-            'name' => 'Design Ui',
-            'slug' => 'design'
-        ]);
+Post::factory(20)->create();
 
-        Category::create([
-            'name' => 'Coding',
-            'slug' => 'Coding'
-        ]);
-
-        Post::create([
-            'title' => 'Judul 1',
-            'slug' => 'judul-1',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-
-        Post::create([
-            'title' => 'Judul 2',
-            'slug' => 'judul-2',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-
-        Post::create([
-            'title' => 'Judul 3',
-            'slug' => 'judul-3',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 2,
-            'user_id' => 2
-        ]);
-
-        User::create([
-            'name' => 'Aasdasda',
-            'email' => 'asdasdas@asda.cc',
-            'password' => bcrypt('123123')
-        ]);
-
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'Web-P'
-        ]);
-
-        Category::create([
-            'name' => 'Programming',
-            'slug' => 'Programming'
-        ]);
-
-        Post::create([
-            'title' => 'Judul 1',
-            'slug' => 'judul1',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-
-        Post::create([
-            'title' => 'Judul 2',
-            'slug' => 'judul2',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 1,
-            'user_id' => 1
-        ]);
-
-        Post::create([
-            'title' => 'Judul 3',
-            'slug' => 'judul3',
-            'excerpt' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto amet pariatur, repudiandae quibusdam quia modi et optio sapiente assumenda beatae voluptate sunt ducimus velit quod qui eum, rerum nulla earum!',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni corrupti velit dolore, optio voluptates quas ratione architecto ut quidem fugit atque asperiores amet. Mollitia quas, alias rerum officia iusto porro.',
-            'category_id' => 2,
-            'user_id' => 2
-        ]);
-    }
+// Jika Anda ingin mengacak nilai dalam Post::create
+Post::create([
+'title' => Str::random(20),
+'slug' => Str::slug(Str::random(20)),
+'excerpt' => Str::random(100),
+'body' => Str::random(500),
+'category_id' => rand(1, 2), // Memilih kategori secara acak
+'user_id' => rand(1, 3) // Memilih user secara acak
+]);
+}
 }

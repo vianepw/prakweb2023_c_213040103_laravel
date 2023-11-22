@@ -5,6 +5,8 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Category;
+use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ Route::get('/', function () {
         "title" => "Home"
     ]);
 });
+
 Route::get('/about', function () {
     return view('About', [
         "title" => "About",
@@ -30,6 +33,7 @@ Route::get('/about', function () {
         "image" => "wardiyane.jpeg"
     ]);
 });
+
 
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
@@ -42,9 +46,16 @@ Route::get('/categories', function () {
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
+    return view('posts', [
+        'title' => "Post by Category : $category->name",
         'posts' => $category->posts,
         'category' => $category->name
+    ]);
+});
+
+Route::get('/authors/{author:username}', function (User $author) {
+    return view('posts', [
+        'title' => "Post By Author : $author->name",
+        'posts' => $author->posts->load('category', 'author')
     ]);
 });
