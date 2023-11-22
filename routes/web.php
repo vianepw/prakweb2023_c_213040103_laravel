@@ -1,23 +1,25 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider and all of them will
-    | be assigned to the "web" middleware group. Make something great!
-    |
-    */
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        "title" => "Home"
+    ]);
 });
-
 Route::get('/about', function () {
     return view('About', [
         "title" => "About",
@@ -27,41 +29,6 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/posts', function () {
-    return view('Posts', [
-        "title" => "Post",
-        "posts" => Post::all()
-    ]);
-});
 
-
-//Halaman Single Post
-Route::get('posts/{slug}', function ($slug) {
-    return view('post', [
-        "title" => "Single Post",
-        "post" => Post::find($slug),
-    ]);
-});
-
-
-
-
-
-Route::get('/posts', function () {
-    return view('Posts', [
-        "title" => "Post",
-        "posts" => Post::all()
-    ]);
-});
-
-
-
-
-
-//Halaman Single Post
-Route::get('posts/{slug}', function ($slug) {
-    return view('post', [
-        "title" => "Single Post",
-        "post" => Post::find($slug),
-    ]);
-});
+Route::get('/blog', [PostController::class, 'index']);
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
