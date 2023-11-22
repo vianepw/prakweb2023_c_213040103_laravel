@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/about', function () {
+    return view('About', [
+        "title" => "About",
+        "name" => "Viane Pindhi W",
+        "email" => "pindhiviane25@gmail.com",
+        "image" => "wardiyane.jpeg"
+    ]);
+});
+
+
+
+
+Route::get('/posts', function () {
+    return view('Posts', [
+        "title" => "Post",
+        "posts" => Post::all()
+    ]);
+});
+
+
+
+
+
+//Halaman Single Post
+Route::get('posts/{slug}', function ($slug) {
+    return view('post', [
+        "title" => "Single Post",
+        "post" => Post::find($slug),
+    ]);
 });
