@@ -32,7 +32,7 @@
             <label for="category" class="form-label">Kategori</label>
             <select class="form-select" name="category_id">
                 @foreach ($categories as $category)
-                @if (old('category_id', $post->category_id) == $category->id)
+                @if(old('category_id', $post->category_id) == $category->id)
                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                 @else
                 <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -44,7 +44,7 @@
         <div class="mb-3">
             <label for="image" class="form-label">Post Image</label>
             <input type="hidden" name="oldImage" value="{{ $post->image }}">
-            @if ($post->image)
+            @if($post->image)
             <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
             @else
             <img class="img-preview img-fluid mb-3 col-sm-5">
@@ -102,4 +102,5 @@
 </script>
 
 </script>
+
 @endsection
