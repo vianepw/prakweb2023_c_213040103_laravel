@@ -28,6 +28,7 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/about', function () {
     return view('About', [
         "title" => "About",
@@ -60,6 +61,9 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
+
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])
+    ->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)
     ->middleware('auth');
